@@ -1,27 +1,5 @@
-{
-  "TEE21": {
-    "status": "valid",
-    "drop": "001",
-    "used": false
-  },
-  "TEE22": {
-    "status": "valid",
-    "drop": "001",
-    "used": true
-  },
-  "TEE23": {
-    "status": "valid",
-    "drop": "002",
-    "used": false
-  },
-  "TEEFAKE1": {
-    "status": "invalid",
-    "drop": null,
-    "used": false
-  },
-  "TEEFAKE2": {
-    "status": "invalid",
-    "drop": null,
-    "used": false
-  }
-}
+[
+  { "code": "TEE21", "used": false },
+  { "code": "TEE22", "used": false },
+  { "code": "TEE23", "used": true }
+]
