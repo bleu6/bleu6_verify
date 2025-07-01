@@ -1,26 +1,57 @@
 body {
-  background-color: #000;
-  color: #0ff;
-  font-family: sans-serif;
-  text-align: center;
-  padding-top: 50px;
+  margin: 0;
+  font-family: 'Space Grotesk', sans-serif;
+  background: #fd6905;
+  color: #f2f2f2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.background-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90vmin;
+  height: 90vmin;
+  background: url('public/logo.png') center center / contain no-repeat;
+  opacity: 0.08;
+  transform: translate(-50%, -50%);
+  z-index: 0;
 }
 
 .container {
-  max-width: 600px;
-  margin: auto;
+  text-align: center;
+  z-index: 2;
 }
 
-#discordBtn {
-  margin-top: 20px;
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #7289da;
-  color: white;
+h1 {
+  font-size: 2.5rem;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem;
+}
+
+#result {
+  font-size: 1.25rem;
+  margin: 1.5rem 0;
+}
+
+.btn {
+  background: #111;
+  padding: 0.8rem 2rem;
+  border: none;
+  color: #f2f2f2;
+  border-radius: 8px;
+  font-size: 1rem;
   text-decoration: none;
-  border-radius: 5px;
+  transition: 0.3s ease;
+  box-shadow: 0 0 10px rgba(255,255,255,0.2);
 }
 
-.hidden {
-  display: none;
+.btn:hover {
+  background: #333;
+  box-shadow: 0 0 15px rgba(255,255,255,0.5);
 }
