@@ -8,23 +8,28 @@ export default function handler(req, res) {
     return res.status(400).json({ success: false, message: 'No code provided' });
   }
 
+  const filePath = path.join(process.cwd(), 'api', 'codes.json');
+  let codes;
+
   try {
-    const filePath = path.join(process.cwd(), 'api', 'codes.json');
-    const data = fs.readFileSync(filePath, 'utf8');
-    const codes = JSON.parse(data);
+    const data = fs.readFileSync(filePath, 'utf-8');
+    codes = JSON.parse(data);
 
-    const code = codes.find(c => c.code === id);
+    const codeIndex = codes.findIndex((c) => c.code === id);
 
-    if (!code) {
-      return res.status(404).json({ success: false, message: 'Code not recognized' });
+    if (codeIndex === -1) {
+      return res.status(404).json({ success: false, status: 'invalid', message: 'Code not recognized' });
     }
 
-    if (code.used) {
+    if (codes[codeIndex].used) {
       return res.status(200).json({ success: true, status: 'used', message: 'Code already used' });
     }
 
-    return res.status(200).json({ success: true, status: 'valid', message: 'Code is authentic' });
+    // Mark code as used
+    codes[codeIndex].used = true;
+    fs.writeFileSync(filePath, JSON.stringify(codes, null, 2));
 
+    return res.status(200).json({ success: true, status: 'valid', message: 'Code is authentic' });
   } catch (error) {
     return res.status(500).json({ success: false, message: 'Could not read verification data.', error: error.message });
   }
