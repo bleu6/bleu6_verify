@@ -1,25 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BLEU6 Verification</title>
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
-  <link rel="stylesheet" href="style.css">
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6S7RJFH3ZG"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-6S7RJFH3ZG');
-  </script>
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <h1>Welcome to BLEU6</h1>
-  <p>This is your official verification page.</p>
-  <a href="https://discord.gg/bded6qT6" target="_blank">
-    <button class="button">Enter the BLEU6 Community</button>
-  </a>
+  <div class="container">
+    <h1>Welcome to BLEU6</h1>
+    <p id="message">Verifying your product...</p>
+    <a id="discordBtn" href="https://discord.gg/bded6qT6" class="hidden" target="_blank">Enter the BLEU6 Community</a>
+  </div>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const id = urlParams.get('id');
+    const message = document.getElementById('message');
+    const discordBtn = document.getElementById('discordBtn');
+
+    async function verifyCode(code) {
+      try {
+        const res = await fetch(`/api/verify?id=${code}`);
+        const result = await res.json();
+
+        if (result.success && result.status === 'valid') {
+          message.textContent = '✅ Verified: ' + result.message;
+          discordBtn.classList.remove('hidden');
+        } else if (result.status === 'used') {
+          message.textContent = '⚠️ ' + result.message;
+        } else {
+          message.textContent = '❌ ' + result.message;
+        }
+      } catch (err) {
+        message.textContent = 'Error connecting to server.';
+      }
+    }
+
+    if (id) {
+      verifyCode(id);
+    } else {
+      message.textContent = 'No code provided in URL.';
+    }
+  </script>
 </body>
 </html>
