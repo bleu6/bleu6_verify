@@ -1,4 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
+import { createClient } from '@supabase/supabase-js'
 
 const supabase = createClient(
   process.env.SUPABASE_URL,
@@ -13,7 +13,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Fetch the code entry from Supabase
+    // Fetch code entry from Supabase
     const { data, error } = await supabase
       .from('codes')
       .select('*')
@@ -28,7 +28,7 @@ export default async function handler(req, res) {
       return res.status(200).json({ success: true, status: 'used', message: 'Code already used' });
     }
 
-    // Mark code as used
+    // Mark as used
     const { error: updateError } = await supabase
       .from('codes')
       .update({ used: true })
