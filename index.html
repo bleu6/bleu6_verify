@@ -4,44 +4,32 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BLEU6 Verification</title>
-  <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
 </head>
 <body>
+  <div class="background-logo"></div>
   <div class="container">
-    <h1>Welcome to BLEU6</h1>
-    <p id="message">Verifying your product...</p>
-    <a id="discordBtn" href="https://discord.gg/bded6qT6" class="hidden" target="_blank">Enter the BLEU6 Community</a>
+    <h1>BLEU6 AUTHENTICITY</h1>
+    <p id="result">Checking code...</p>
+    <a href="https://discord.gg/YOURSERVER" class="btn">Enter the BLEU6 Community</a>
   </div>
 
   <script>
     const urlParams = new URLSearchParams(window.location.search);
-    const id = urlParams.get('id');
-    const message = document.getElementById('message');
-    const discordBtn = document.getElementById('discordBtn');
-
-    async function verifyCode(code) {
-      try {
-        const res = await fetch(`/api/verify?id=${code}`);
-        const result = await res.json();
-
-        if (result.success && result.status === 'valid') {
-          message.textContent = '✅ Verified: ' + result.message;
-          discordBtn.classList.remove('hidden');
-        } else if (result.status === 'used') {
-          message.textContent = '⚠️ ' + result.message;
+    const code = urlParams.get('id');
+    fetch(`/api/verify?id=${code}`)
+      .then(res => res.json())
+      .then(data => {
+        const result = document.getElementById('result');
+        if (data.status === "valid") {
+          result.innerHTML = "✅ Verified: Code is authentic";
+        } else if (data.status === "used") {
+          result.innerHTML = "⚠️ This code has already been used.";
         } else {
-          message.textContent = '❌ ' + result.message;
+          result.innerHTML = "❌ Invalid code.";
         }
-      } catch (err) {
-        message.textContent = 'Error connecting to server.';
-      }
-    }
-
-    if (id) {
-      verifyCode(id);
-    } else {
-      message.textContent = 'No code provided in URL.';
-    }
+      });
   </script>
 </body>
 </html>
