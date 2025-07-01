@@ -1,0 +1,17 @@
+{
+  "name": "bleu6-verify",
+  "version": "1.0.0",
+  "description": "BLEU6 NFC Code Verification Landing Page",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.42.5"
+  },
+  "devDependencies": {},
+  "keywords": [],
+  "author": "BLEU6",
+  "license": "MIT"
+}
