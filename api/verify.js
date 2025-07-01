@@ -7,7 +7,6 @@ export default function handler(req, res) {
   if (!id) {
     return res.status(400).json({ success: false, message: 'No code provided' });
   }
-
 const filePath = path.resolve('./api/codes.json');
   let codes;
 
