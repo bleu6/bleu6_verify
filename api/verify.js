@@ -9,7 +9,7 @@ export default function handler(req, res) {
     return res.status(400).json({ success: false, message: 'No product ID provided.' });
   }
 
-  const filePath = path.join(process.cwd(), 'codes.json');
+const filePath = path.join(__dirname, 'codes.json');
   let codes;
 
   try {
