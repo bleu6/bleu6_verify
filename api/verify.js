@@ -8,7 +8,7 @@ export default function handler(req, res) {
     return res.status(400).json({ success: false, message: 'No code provided' });
   }
 
-  const filePath = path.join(process.cwd(), 'api', 'codes.json');
+const filePath = path.resolve('./api/codes.json');
   let codes;
 
   try {
