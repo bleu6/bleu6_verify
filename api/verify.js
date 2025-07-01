@@ -1,5 +1,4 @@
-const fs = require('fs');
-const path = require('path');
+import codes from './codes.json';
 
 export default function handler(req, res) {
   const { id } = req.query;
@@ -8,25 +7,15 @@ export default function handler(req, res) {
     return res.status(400).json({ status: 'error', message: 'No code provided' });
   }
 
-  const filePath = path.join(__dirname, 'codes.json');
+  const code = codes.find(c => c.code === id);
 
-  try {
-    const data = fs.readFileSync(filePath, 'utf8');
-    const codes = JSON.parse(data);
-
-    const code = codes.find(c => c.code === id);
-
-    if (!code) {
-      return res.status(404).json({ status: 'invalid', message: 'Code not recognized' });
-    }
-
-    if (code.used) {
-      return res.status(200).json({ status: 'used', message: 'Code already used' });
-    }
-
-    return res.status(200).json({ status: 'valid', message: 'Code is authentic' });
-
-  } catch (error) {
-    return res.status(500).json({ status: 'error', message: 'Server error', error: error.message });
+  if (!code) {
+    return res.status(404).json({ status: 'invalid', message: 'Code not recognized' });
   }
+
+  if (code.used) {
+    return res.status(200).json({ status: 'used', message: 'Code already used' });
+  }
+
+  return res.status(200).json({ status: 'valid', message: 'Code is authentic' });
 }
