@@ -1,8 +1,8 @@
 body {
   margin: 0;
   font-family: 'Space Grotesk', sans-serif;
-  background: #FD6905; /* Luxury orange */
-  color: #F2F2F2;
+  background: #fd6905;
+  color: #f2f2f2;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -17,20 +17,10 @@ body {
   left: 50%;
   width: 90vmin;
   height: 90vmin;
-  background: url('logo.png') center center / contain no-repeat;
+  background: url('public/logo.png') center center / contain no-repeat;
   opacity: 0.08;
   transform: translate(-50%, -50%);
   z-index: 0;
-  animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translate(-50%, -50%);
-  }
-  50% {
-    transform: translate(-50%, -55%);
-  }
 }
 
 .container {
@@ -41,27 +31,27 @@ body {
 h1 {
   font-size: 2.5rem;
   letter-spacing: 0.05em;
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
 }
 
-.status-message {
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
-  color: #f1f1f1;
+#result {
+  font-size: 1.25rem;
+  margin: 1.5rem 0;
 }
 
-.discord-button {
-  background-color: #ffffff;
-  color: #000000;
-  padding: 12px 24px;
-  border-radius: 30px;
-  font-weight: bold;
+.btn {
+  background: #111;
+  padding: 0.8rem 2rem;
+  border: none;
+  color: #f2f2f2;
+  border-radius: 8px;
+  font-size: 1rem;
   text-decoration: none;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  transition: all 0.3s ease;
+  transition: 0.3s ease;
+  box-shadow: 0 0 10px rgba(255,255,255,0.2);
 }
 
-.discord-button:hover {
-  background-color: #f2f2f2;
-  transform: translateY(-2px);
+.btn:hover {
+  background: #333;
+  box-shadow: 0 0 15px rgba(255,255,255,0.5);
 }
